@@ -4,15 +4,15 @@ A dynamic, privacy-focused assessment tool to help users understand their AI usa
 
 ## 🚀 How to Deploy on GitHub Pages
 
-1.  **Upload Files**:
-    *   Upload `ai-dependency-quiz.html` to your GitHub repository.
-    *   (Optional) Rename it to `index.html` if you want it to be the main page (e.g., `yourname.github.io/repository-name/`). If you keep it as `ai-dependency-quiz.html`, your link will be `.../ai-dependency-quiz.html`.
+1.  **Direct Deployment**:
+    *   This repository is configured with `index.html` as the main entry point. 
+    *   Simply push this code to a new GitHub repository to go live.
 
 2.  **Enable GitHub Pages**:
     *   Go to your Repository **Settings**.
     *   Click on **Pages** (in the left sidebar).
     *   Under **Source**, select `Deploy from a branch`.
-    *   Select your branch (usually `main` or `master`) and folder `/(root)`.
+    *   Select your branch (usually `master`) and folder `/(root)`.
     *   Click **Save**.
 
 3.  **Share the Link**:
