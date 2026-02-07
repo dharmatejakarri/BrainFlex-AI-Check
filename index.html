@@ -10,14 +10,11 @@
         rel="stylesheet">
     <style>
         :root {
-            /* Framer-Style Deep Palette */
-            --bg-dark: #050505;
-            /* Rich, subtle mesh gradient */
-            --bg-gradient: radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15), transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.15), transparent 25%);
+            /* Dynamic Background Colors */
+            --bg-color-1: #050505;
+            --bg-color-2: #0a0a0a;
 
             --bg-panel: rgba(255, 255, 255, 0.03);
-            /* Ultra glass */
             --border-panel: rgba(255, 255, 255, 0.08);
 
             /* High-Contrast Neons */
@@ -38,8 +35,7 @@
 
         body {
             font-family: 'Quicksand', sans-serif;
-            background-color: var(--bg-dark);
-            background-image: var(--bg-gradient);
+            background: linear-gradient(135deg, var(--bg-color-1), var(--bg-color-2));
             background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
@@ -48,20 +44,24 @@
             justify-content: center;
             align-items: center;
             position: relative;
+            transition: background 1.5s ease;
+            /* Smooth color shift */
         }
 
         /* Floating Background Elements */
         .floating-icon {
             position: absolute;
             font-size: 2.5rem;
-            opacity: 0.12;
-            /* Subtle */
+            opacity: 0.15;
+            /* Slightly higher base opacity */
             animation: floatIcon 25s infinite linear;
             z-index: 0;
             pointer-events: auto;
-            /* Allow interaction */
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Visibility Improvements */
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.1);
         }
 
         .floating-icon:hover {
@@ -467,11 +467,7 @@
 
             // 1. Massive Pool of Unique AI/Brain/Tech Emojis
             const emojis = [
-                '🤖', '🧠', '💻', '🖥️', '💾', '🔌', '🔋', '📱', '🖱️', '⌨️',
-                '🌐', '🔍', '⚙️', '🔧', '💡', '⚡', '✨', '🔮', '🧬', '🔬',
-                '🧪', '📊', '📈', '📉', '🔢', '🧮', '1️⃣', '0️⃣', '🔄', '⏳',
-                '▶️', '⏹️', '⏸️', '🔁', '🔂', '📡', '🛰️', '🛸', '👾', '🎮',
-                '🕹️', '💽', '💿', '🖨️', '📞', '📲', '🖲️', '🧠✨'
+                '🧠', '💭', '🤔', '😯', '💡', '👁️', '🧩', '🔍', '⚖️', '📝', '📚', '🗺️', '🔄', '⏳', '🧮', '📊', '📈', '🎯', '🏆', '🎨', '✏️', '🎭', '🌟', '💫', '🦋', '🌱', '🚀', '🔬', '🧪', '🕸️', '🔗', '🌐', '⚙️', '🔧', '🔋', '⚡', '✨', '🔮', '🧬', '🧘', '😌', '👃', '👂', '🙌', '💪', '🥊', '🏃', '🧗', '🔥', '🧠', '🤖', '👤', '💻', '🧑', '🎨', '🖥️', '🧠', '⚙️', '👁️', '🔍', '👐', '📱', '💭', '🧩', '🏎️', '⏱️', '🏁', '🌀', '🔁', '▶️', '⏯️', '🛡️', '❤️', '😊', '🥺', '😂', '😎', '🙏', '🌈', '💖', '🦄', '🕊️', '🥇', '🥈', '🥉', '👑', '🏅', '📜', '🎓', '🔓', '🌠', '👀', '👅', '👃', '👂', '✋', '🌈', '🔊', '📡', '🛰️', '🧭', '🌿', '🍃', '🌺', '☘️', '🌻', '🌸', '🍀', '🫘', '🌵', '🪴', '💚', '❤️', '🌈', '🧡', '💜', '🩷', '🫶', '😍', '🥰', '🤗', '☮️', '✨', '🌟', '💫', '⭐', '🌙', '☀️', '🌞', '🌤️', '⛅', '🌥️', '🌦️', '🌧️', '🌨️', '🌩️', '⚡', '🌪️', '🌈', '🌀', '💨', '🦋', '🐛', '🪰', '🐝', '🪱', '🐌'
             ];
 
             // 2. Custom SVG "Images" for distinct look (Human Brain & AI Chip)
@@ -706,7 +702,31 @@
                     scores[key] = Math.max(0, Math.min(100, scores[key] + val));
                 }
             }
+
+            // Dynamic Background Logic
+            const progress = questionCount / MAX_QUESTIONS;
+            updateDynamicBackground(progress);
+
             renderNextQuestion();
+        }
+
+        function updateDynamicBackground(progress) {
+            // Gradient pairs for transition
+            const gradients = [
+                { c1: '#050505', c2: '#0a0a0a' }, // Start: Deep Black
+                { c1: '#0f172a', c2: '#1e1b4b' }, // Step 2: Dark Blue
+                { c1: '#1e1b4b', c2: '#312e81' }, // Step 4: Indigo
+                { c1: '#312e81', c2: '#4c1d95' }, // Step 6: Deep Purple
+                { c1: '#4c1d95', c2: '#701a75' }, // Step 8: Fuchsia
+                { c1: '#1e1b4b', c2: '#050505' }  // End: Back to Deep
+            ];
+
+            const index = Math.floor(progress * (gradients.length - 1));
+            const color1 = gradients[index].c1;
+            const color2 = gradients[index].c2;
+
+            document.documentElement.style.setProperty('--bg-color-1', color1);
+            document.documentElement.style.setProperty('--bg-color-2', color2);
         }
 
         function showResults() {
