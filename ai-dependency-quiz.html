@@ -462,33 +462,72 @@
     <script>
         // --- FLOATING BG LOGIC ---
         function initBg() {
-            // Expanded AI & Brain Icons
-            const icons = ['🤖', '🧠', '🤯', '🦾', '🧬', '🖥️', '📡', '⚡', '🔗', '🧪', '🌐', '💾', '👁️', '🕸️'];
             const container = document.getElementById('bg-anim');
 
-            for (let i = 0; i < 25; i++) {
+            // 1. Massive Pool of Unique AI/Brain/Tech Emojis
+            const emojis = [
+                '�', '�', '🤯', '🦾', '🧬', '🖥️', '📡', '⚡', '🔗', '🧪', '🌐', '💾', '👁️', '🕸️',
+                '👾', '🕹️', '📱', '💿', '📀', '🔌', '🔋', '🔬', '🔭', '🌌', '🎇', '🎆', '🛸', '🛰️',
+                '🔧', '⚙️', '🧱', '🏗️', '📐', '🛡️', '🔒', '🔑', '🛎️', '🕰️', '🕯️', '💡', '🔦'
+            ];
+
+            // 2. Custom SVG "Images" for distinct look (Human Brain & AI Chip)
+            const svgs = [
+                // Brain SVG (White/Ghostly)
+                `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 20c-2.5 0-4.5-1.5-4.5-4.5S6.5 10 9.5 10s4.5 1.5 4.5 4.5S12 20 9.5 20z" opacity="0.8"/><path d="M14.5 20c2.5 0 4.5-1.5 4.5-4.5S17.5 10 14.5 10s-4.5 1.5-4.5 4.5S12 20 14.5 20z" opacity="0.8"/><path d="M12 10V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v6" opacity="0.6"/><path d="M12 10V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v6" opacity="0.6"/></svg>`,
+                // AI Chip SVG
+                `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M9 9h6v6H9z" /><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3" /></svg>`,
+                // Network Node
+                `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="5" r="3" /><circle cx="5" cy="19" r="3" /><circle cx="19" cy="19" r="3" /><path d="M8.5 17.5l2.5-10 2.5 10" /><path d="M12 8v11" /></svg>`
+            ];
+
+            // Combine and Shuffle for Uniqueness
+            let pool = [...emojis];
+
+            // Add SVGs multiple times to mix them in
+            for (let i = 0; i < 5; i++) pool.push(...svgs);
+
+            // Shuffle function
+            pool.sort(() => Math.random() - 0.5);
+
+            // Create Elements (Limit to pool size to avoid repeats if possible, or loop)
+            const count = 30;
+
+            for (let i = 0; i < count; i++) {
                 const el = document.createElement('div');
-                el.innerText = icons[Math.floor(Math.random() * icons.length)];
                 el.className = 'floating-icon';
 
+                // Use SVG or Text
+                const item = pool[i % pool.length]; // cycle if count > pool
+                if (item.startsWith('<svg')) {
+                    el.innerHTML = item;
+                    el.style.width = (3 + Math.random() * 2) + 'rem'; // SVGs needs explicit width
+                    el.style.height = el.style.width;
+                    el.style.color = 'rgba(255,255,255,0.2)'; // SVG Color
+                } else {
+                    el.innerText = item;
+                    el.style.fontSize = (2 + Math.random() * 3) + 'rem';
+                }
+
                 // Randomize position across entire screen width
-                el.style.left = (Math.random() * 100) + 'vw';
+                el.style.left = (Math.random() * 95) + 'vw'; // Avoid extreme edge overflow
 
                 // Vertical flow logic
-                el.style.animationDuration = (8 + Math.random() * 15) + 's'; // Faster flow: 8-23s
-                el.style.fontSize = (2 + Math.random() * 3) + 'rem'; // Varied sizes
-                el.style.animationDelay = (Math.random() * -20) + 's'; // Start at random offsets
+                el.style.animationDuration = (10 + Math.random() * 20) + 's';
+                el.style.animationDelay = (Math.random() * -30) + 's'; // Start scattered
 
                 // Interactive
                 el.addEventListener('mouseover', () => {
                     el.style.transform = 'scale(1.4) rotate(20deg)';
                     el.style.opacity = '1';
+                    el.style.color = 'var(--neon-blue)';
                     el.style.textShadow = '0 0 20px var(--neon-purple)';
                 });
 
                 el.addEventListener('mouseout', () => {
                     el.style.transform = '';
                     el.style.opacity = '';
+                    el.style.color = item.startsWith('<svg') ? 'rgba(255,255,255,0.2)' : '';
                     el.style.textShadow = '';
                 });
 
