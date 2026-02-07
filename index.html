@@ -110,14 +110,15 @@
         }
 
         h1 {
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-size: clamp(1.8rem, 8vw, 3.5rem);
             /* Fluid typography */
             background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             line-height: 1.1;
+            font-weight: 700;
         }
 
         .lead {
@@ -207,7 +208,7 @@
         .option-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-panel);
-            padding: 25px;
+            padding: 20px;
             border-radius: 16px;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -331,45 +332,76 @@
         @media (max-width: 768px) {
             .options-grid {
                 grid-template-columns: 1fr;
-                gap: 12px;
+                gap: 10px;
             }
 
             .metrics-grid {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 10px;
             }
 
             .metric-val {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
+            }
+
+            .metric-card {
+                padding: 15px 5px;
             }
 
             .glass-panel {
-                padding: 25px 15px;
-                width: 92%;
+                padding: 24px 16px;
+                width: 94%;
                 margin: 10px 0;
                 min-height: auto;
-                border-radius: 24px;
+                border-radius: 20px;
             }
 
             .btn-neon {
                 width: 100%;
-                padding: 15px 30px;
+                padding: 14px 25px;
+                font-size: 1rem;
             }
 
             .floating-icon {
-                font-size: 1.8rem;
-                /* Smaller icons on mobile */
-                opacity: 0.1;
+                font-size: 1.5rem;
+                /* Even smaller on mobile */
+                opacity: 0.08;
+            }
+
+            .bot-mascot {
+                font-size: 4rem;
+                /* Smaller mascot */
+            }
+
+            h1 {
+                text-align: center;
+            }
+
+            .lead {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            #intro-screen {
+                align-items: center !important;
+                text-align: center;
             }
         }
 
         @media (max-width: 480px) {
             .metrics-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                /* Keep 2 cols but tighten */
+                gap: 8px;
+            }
+
+            .metric-val {
+                font-size: 1.3rem;
             }
 
             h1 {
-                text-align: left;
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -396,7 +428,7 @@
                 Are you losing the ability to focus, remember, and create? Let's take a deep look under the hood.
             </p>
 
-            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 30px; justify-content: center;">
                 <div
                     style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-panel); padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px;">
                     <span style="font-size: 1.2rem;">🧠</span>
