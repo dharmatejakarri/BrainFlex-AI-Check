@@ -460,27 +460,24 @@
     </div>
 
     <script>
-        // --- FLOATING BG LOGIC (Strictly Side Distribution) ---
+        // --- FLOATING BG LOGIC ---
         function initBg() {
-            // STRICTLY Brain & AI icons
-            const icons = ['🤖', '🧠', '⚡', '🔗', '�', '✨', '�'];
+            // Expanded AI & Brain Icons
+            const icons = ['🤖', '🧠', '🤯', '🦾', '🧬', '🖥️', '📡', '⚡', '🔗', '🧪', '🌐', '💾', '👁️', '🕸️'];
             const container = document.getElementById('bg-anim');
 
-            for (let i = 0; i < 16; i++) {
+            for (let i = 0; i < 25; i++) {
                 const el = document.createElement('div');
                 el.innerText = icons[Math.floor(Math.random() * icons.length)];
                 el.className = 'floating-icon';
 
-                // DISTRIBUTE: 50% Left side, 50% Right side to avoid center text
-                const isLeft = Math.random() > 0.5;
-                const min = isLeft ? 0 : 85;
-                const max = isLeft ? 15 : 100;
+                // Randomize position across entire screen width
+                el.style.left = (Math.random() * 100) + 'vw';
 
-                el.style.left = (Math.random() * (max - min) + min) + 'vw';
-
-                el.style.animationDuration = (15 + Math.random() * 20) + 's';
-                el.style.fontSize = (2.5 + Math.random() * 2) + 'rem'; // Larger
-                el.style.animationDelay = (Math.random() * -20) + 's';
+                // Vertical flow logic
+                el.style.animationDuration = (8 + Math.random() * 15) + 's'; // Faster flow: 8-23s
+                el.style.fontSize = (2 + Math.random() * 3) + 'rem'; // Varied sizes
+                el.style.animationDelay = (Math.random() * -20) + 's'; // Start at random offsets
 
                 // Interactive
                 el.addEventListener('mouseover', () => {
