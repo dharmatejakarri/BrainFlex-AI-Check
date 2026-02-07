@@ -10,21 +10,24 @@
         rel="stylesheet">
     <style>
         :root {
-            /* Deep Space Palette */
-            --bg-dark: #0f0c29;
-            --bg-gradient: linear-gradient(30deg, #0f0c29, #302b63, #24243e);
-            --bg-panel: rgba(20, 20, 35, 0.6);
-            --border-panel: rgba(255, 255, 255, 0.1);
+            /* Framer-Style Deep Palette */
+            --bg-dark: #050505;
+            /* Rich, subtle mesh gradient */
+            --bg-gradient: radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.15), transparent 25%);
 
-            /* Neons */
-            --neon-blue: #4facfe;
-            --neon-purple: #a18cd1;
-            --neon-pink: #ff9a9e;
-            --neon-green: #43e97b;
+            --bg-panel: rgba(255, 255, 255, 0.03);
+            /* Ultra glass */
+            --border-panel: rgba(255, 255, 255, 0.08);
 
-            /* Text */
-            --text-main: #ffffff;
-            --text-muted: #e0e0e0;
+            /* High-Contrast Neons */
+            --neon-blue: #38bdf8;
+            --neon-purple: #c084fc;
+            --neon-pink: #f472b6;
+            --neon-green: #4ade80;
+
+            --text-main: #fafafa;
+            --text-muted: #a1a1aa;
         }
 
         * {
@@ -35,9 +38,9 @@
 
         body {
             font-family: 'Quicksand', sans-serif;
-            background: var(--bg-gradient);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: var(--bg-dark);
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
             overflow-x: hidden;
@@ -47,28 +50,25 @@
             position: relative;
         }
 
-        @keyframes gradientBG {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
         /* Floating Background Elements */
         .floating-icon {
             position: absolute;
-            font-size: 2rem;
-            opacity: 0.15;
-            animation: floatIcon 20s infinite linear;
+            font-size: 2.5rem;
+            opacity: 0.12;
+            /* Subtle */
+            animation: floatIcon 25s infinite linear;
             z-index: 0;
-            pointer-events: none;
+            pointer-events: auto;
+            /* Allow interaction */
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .floating-icon:hover {
+            opacity: 0.8;
+            transform: scale(1.3);
+            text-shadow: 0 0 15px var(--neon-blue);
+            z-index: 1;
         }
 
         @keyframes floatIcon {
@@ -87,11 +87,12 @@
             max-width: 900px;
             min-height: 600px;
             background: var(--bg-panel);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             border: 1px solid var(--border-panel);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            /* Deep shadow */
             padding: 50px;
             position: relative;
             z-index: 10;
@@ -109,12 +110,12 @@
         }
 
         h1 {
-            font-size: 3rem;
-            background: linear-gradient(to right, #fff, #a18cd1);
+            font-size: 3.5rem;
+            /* Framer-style text gradient */
+            background: linear-gradient(135deg, #fff 30%, #94a3b8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 1.5rem;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
         .lead {
@@ -141,11 +142,13 @@
             from {
                 opacity: 0;
                 transform: translateY(20px);
+                filter: blur(5px);
             }
 
             to {
                 opacity: 1;
                 transform: translateY(0);
+                filter: blur(0);
             }
         }
 
@@ -155,26 +158,25 @@
             align-items: center;
             justify-content: center;
             padding: 18px 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid var(--border-panel);
             color: #fff;
             font-family: 'Space Grotesk', sans-serif;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 1.1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            /* Smooth corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .btn-neon:hover {
-            background: var(--neon-blue);
             border-color: var(--neon-blue);
-            box-shadow: 0 0 25px rgba(79, 172, 254, 0.6);
-            transform: translateY(-3px);
-            color: #fff;
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         /* Question UI */
@@ -184,12 +186,12 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--border-panel);
         }
 
         .question-text {
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 2rem;
+            font-weight: 500;
             margin-bottom: 40px;
             line-height: 1.3;
         }
@@ -201,21 +203,20 @@
         }
 
         .option-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-panel);
             padding: 25px;
             border-radius: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
         }
 
         .option-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-4px) scale(1.02);
-            border-color: var(--neon-purple);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            transform: scale(1.01);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .option-card:active {
@@ -224,10 +225,11 @@
 
         /* Results UI */
         .bot-mascot {
-            font-size: 5rem;
+            font-size: 6rem;
             text-align: center;
             margin-bottom: 10px;
-            animation: bounce 2s infinite ease-in-out;
+            animation: bounce 3s infinite ease-in-out;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
         }
 
         @keyframes bounce {
@@ -238,7 +240,7 @@
             }
 
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-20px);
             }
         }
 
@@ -250,11 +252,11 @@
         }
 
         .metric-card {
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.2);
             padding: 20px 10px;
-            border-radius: 12px;
+            border-radius: 16px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-panel);
             transition: transform 0.3s;
         }
 
@@ -276,21 +278,23 @@
             text-transform: uppercase;
             font-weight: 600;
             letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.7);
+            color: var(--text-muted);
         }
 
         /* Rec Cards (Claude Style) */
         .rec-container {
             display: grid;
-            gap: 20px;
+            gap: 15px;
             margin-top: 30px;
         }
 
         .rec-card {
-            background: #fff;
-            color: #333;
+            background: rgba(255, 255, 255, 0.05);
+            /* Dark card */
+            border: 1px solid var(--border-panel);
+            color: var(--text-main);
             padding: 25px;
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -298,7 +302,9 @@
         }
 
         .rec-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .rec-icon {
@@ -309,14 +315,14 @@
         .rec-title {
             font-weight: 700;
             font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--bg-dark);
+            margin-bottom: 5px;
+            color: #fff;
         }
 
         .rec-text {
             font-size: 0.95rem;
             line-height: 1.5;
-            color: #555;
+            color: var(--text-muted);
         }
 
         /* Responsive */
@@ -353,8 +359,9 @@
         <div id="intro-screen" class="screen active" style="align-items: flex-start; justify-content: center;">
             <div
                 style="font-family: 'Space Grotesk'; color: var(--neon-green); margin-bottom: 15px; font-weight: 700; letter-spacing: 2px;">
-                <span style="background: rgba(67, 233, 123, 0.2); padding: 5px 10px; border-radius: 4px;">SYSTEM
-                    V4.0</span>
+                <span
+                    style="background: rgba(74, 222, 128, 0.1); padding: 5px 12px; border-radius: 8px; border: 1px solid rgba(74,222,128, 0.2);">SYSTEM
+                    V5.0</span>
             </div>
             <h1>Is AI Enhancing You,<br>Or Erasing You?</h1>
             <p class="lead" style="margin-bottom: 40px;">
@@ -364,35 +371,31 @@
 
             <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
                 <div
-                    style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.5rem;">🧠</span>
-                    <span style="font-weight: 600;">Deep Focus</span>
+                    style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-panel); padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.2rem;">🧠</span>
+                    <span style="font-weight: 600; font-size: 0.9rem;">Deep Focus</span>
                 </div>
                 <div
-                    style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.5rem;">🤖</span>
-                    <span style="font-weight: 600;">AI Reliance</span>
-                </div>
-                <div
-                    style="background: rgba(255,255,255,0.05); padding: 15px 25px; border-radius: 50px; display: flex; align-items: center; gap: 10px;">
-                    <span style="font-size: 1.5rem;">⚡</span>
-                    <span style="font-weight: 600;">10 Questions</span>
+                    style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-panel); padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px;">
+                    <span style="font-size: 1.2rem;">🤖</span>
+                    <span style="font-weight: 600; font-size: 0.9rem;">AI Reliance</span>
                 </div>
             </div>
 
             <button class="btn-neon" onclick="startQuiz()">Start Analysis</button>
-            <div style="margin-top: 20px; opacity: 0.6; font-size: 0.9rem;">🔒 100% Anonymous & Private</div>
+            <div style="margin-top: 25px; opacity: 0.5; font-size: 0.85rem; letter-spacing: 0.5px;">🔒 100% ANONYMOUS &
+                LOCAL</div>
         </div>
 
         <!-- QUIZ -->
         <div id="quiz-screen" class="screen">
             <div class="q-header">
-                <div style="font-family: 'Space Grotesk'; opacity: 0.8; font-weight: 500;">
+                <div style="font-family: 'Space Grotesk'; opacity: 0.6; font-weight: 500; font-size: 0.9rem;">
                     SCANNING... <span id="q-number" style="color: var(--neon-blue); font-weight: 700;">01</span> / 10
                 </div>
-                <div style="width: 150px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px;">
+                <div style="width: 150px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px;">
                     <div id="progress-bar"
-                        style="width: 0%; height: 100%; background: var(--neon-blue); border-radius: 3px; transition: width 0.3s; box-shadow: 0 0 10px var(--neon-blue);">
+                        style="width: 0%; height: 100%; background: var(--neon-blue); border-radius: 2px; transition: width 0.3s; box-shadow: 0 0 15px var(--neon-blue);">
                     </div>
                 </div>
             </div>
@@ -408,11 +411,11 @@
 
             <div style="text-align: center; margin-bottom: 30px;">
                 <h2
-                    style="color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px;">
+                    style="color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">
                     Analysis Complete</h2>
-                <h1 id="result-title" style="margin-bottom: 10px;">System Hybrid</h1>
+                <h1 id="result-title" style="margin-bottom: 12px; font-size: 2.5rem;">System Hybrid</h1>
                 <p id="result-desc"
-                    style="max-width: 600px; margin: 0 auto; line-height: 1.6; color: #eee; font-size: 1.1rem;">
+                    style="max-width: 600px; margin: 0 auto; line-height: 1.6; color: #d4d4d8; font-size: 1.05rem;">
                     Processing...
                 </p>
             </div>
@@ -437,8 +440,9 @@
             </div>
 
             <div style="margin-top: 20px;">
-                <h3 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                    <span>💡</span> Your Personalized Recommendations
+                <h3
+                    style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; color: #fff;">
+                    <span>💡</span> Recommended Protocols
                 </h3>
                 <div class="rec-container" id="recs-container">
                     <!-- Dynamic Recs -->
@@ -446,44 +450,46 @@
             </div>
 
             <div style="margin-top: 40px; display: flex; justify-content: center; gap: 20px;">
-                <button class="btn-neon" onclick="location.reload()">Take Again 🔄</button>
+                <button class="btn-neon" onclick="location.reload()">Re-Calibrate 🔄</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        // --- FLOATING BG LOGIC ---
+        // --- FLOATING BG LOGIC (Strictly Side Distribution) ---
         function initBg() {
-            const icons = ['🤖', '🧠', '💻', '⚡', '💾', '🔗', '📡', '🔋', '🌐', '🧬', '🔮'];
+            // STRICTLY Brain & AI icons
+            const icons = ['🤖', '🧠', '⚡', '🔗', '�', '✨', '�'];
             const container = document.getElementById('bg-anim');
 
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 16; i++) {
                 const el = document.createElement('div');
                 el.innerText = icons[Math.floor(Math.random() * icons.length)];
                 el.className = 'floating-icon';
 
-                // Randomize position and animation properties
-                el.style.left = Math.random() * 100 + 'vw';
-                el.style.animationDuration = (10 + Math.random() * 15) + 's'; // Faster: 10-25s
-                el.style.fontSize = (2 + Math.random() * 3) + 'rem'; // Larger: 2-5rem
-                el.style.animationDelay = (Math.random() * -20) + 's'; // Start at random times
+                // DISTRIBUTE: 50% Left side, 50% Right side to avoid center text
+                const isLeft = Math.random() > 0.5;
+                const min = isLeft ? 0 : 85;
+                const max = isLeft ? 15 : 100;
 
-                // Interactive functionality
+                el.style.left = (Math.random() * (max - min) + min) + 'vw';
+
+                el.style.animationDuration = (15 + Math.random() * 20) + 's';
+                el.style.fontSize = (2.5 + Math.random() * 2) + 'rem'; // Larger
+                el.style.animationDelay = (Math.random() * -20) + 's';
+
+                // Interactive
                 el.addEventListener('mouseover', () => {
-                    el.style.transform = 'scale(1.5) rotate(360deg)';
-                    el.style.transition = 'transform 0.3s ease-out';
-                    el.style.textShadow = '0 0 20px var(--neon-blue)';
-                    setTimeout(() => {
-                        el.style.transition = '';
-                        el.style.textShadow = '';
-                    }, 500);
+                    el.style.transform = 'scale(1.4) rotate(20deg)';
+                    el.style.opacity = '1';
+                    el.style.textShadow = '0 0 20px var(--neon-purple)';
                 });
 
-                // Touch support
-                el.addEventListener('touchstart', () => {
-                    el.style.transform = 'scale(1.5) rotate(360deg)';
-                    el.style.textShadow = '0 0 20px var(--neon-blue)';
+                el.addEventListener('mouseout', () => {
+                    el.style.transform = '';
+                    el.style.opacity = '';
+                    el.style.textShadow = '';
                 });
 
                 container.appendChild(el);
